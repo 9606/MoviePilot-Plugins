@@ -265,13 +265,14 @@ class TorrentClassifierEnhance(_PluginBase):
                                     {
                                         'component': 'VSelect',
                                         'props': {
+                                            'chips': True,
+                                            'multiple': True,
+                                            'clearable': True,
                                             'model': 'downloaders',
                                             'label': '下载器',
                                             'items': [{"title": config.name, "value": config.name}
                                                       for config in self.downloader_helper.get_configs().values()
-                                                      if config.type == "qbittorrent"],
-                                            'hint': '选择下载器',
-                                            'persistent-hint': True
+                                                      if config.type == "qbittorrent"]
                                         }
                                     }
                                 ]
