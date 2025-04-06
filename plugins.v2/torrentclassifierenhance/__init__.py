@@ -396,7 +396,7 @@ class TorrentClassifierEnhance(_PluginBase):
                 else:
                     torrents = self.__get_torrents(downloader=downloader_obj)
                     torrent_datas = self.__get_all_hashes_and_torrents(torrents)
-                    self.__apply_first_matching_rule_to_torrents(torrent_datas=torrent_datas)
+                    self.__apply_first_matching_rule_to_torrents(torrent_datas=torrent_datas, downloader=downloader_obj)
 
     def __get_torrents(self, downloader: Any) -> Optional[List[Any]]:
         """
@@ -428,7 +428,7 @@ class TorrentClassifierEnhance(_PluginBase):
 
             torrent_datas = self.__get_all_hashes_and_torrents(torrents)
             classifier_torrents = self.__get_should_classifier_torrents(torrent_datas=torrent_datas, config=config)
-            result = self.__torrent_classifier_for_qb(classifier_torrents=classifier_torrents)
+            result = self.__torrent_classifier_for_qb(classifier_torrents=classifier_torrents, downloader=downloader)
             if not result:
                 continue
             success_count, failed_count, success_titles, failed_titles = result
@@ -451,13 +451,13 @@ class TorrentClassifierEnhance(_PluginBase):
             final_summary_message = "\n".join(summary_messages)
             self.__send_message(title="【种子规则分类整理汇总】", text=final_summary_message)
 
-    def __apply_first_matching_rule_to_torrents(self, torrent_datas: dict):
+    def __apply_first_matching_rule_to_torrents(self, torrent_datas: dict, downloader: Any):
         """
         对每个种子应用第一个匹配的规则
         """
         # 初始化成功和失败的计数器和列表
         classifier_torrents = self.__get_should_classifier_torrents(torrent_datas=torrent_datas)
-        result = self.__torrent_classifier_for_qb(classifier_torrents=classifier_torrents)
+        result = self.__torrent_classifier_for_qb(classifier_torrents=classifier_torrents, downloader=downloader)
         if not result:
             return
         success_count, failed_count, success_titles, failed_titles = result
@@ -475,11 +475,8 @@ class TorrentClassifierEnhance(_PluginBase):
 
         self.__send_message(title="【种子关键字分类整理】", text=summary_message)
 
-    def __torrent_classifier_for_qb(self, classifier_torrents: dict) -> Optional[Tuple[int, int, List[str], List[str]]]:
+    def __torrent_classifier_for_qb(self, classifier_torrents: dict, downloader: Any) -> Optional[Tuple[int, int, List[str], List[str]]]:
         """针对QB进行种子整理"""
-        # 获取下载器实例
-        downloader = self.downloader
-
         success_count = 0
         failed_count = 0
         success_titles = []
