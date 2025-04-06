@@ -23,7 +23,7 @@ from app.schemas import NotificationType, ServiceInfo
 lock = threading.Lock()
 
 
-class TorrentClassifier(_PluginBase):
+class TorrentClassifierEnhance(_PluginBase):
     # 插件名称
     plugin_name = "种子分类整理增强版"
     # 插件ID
