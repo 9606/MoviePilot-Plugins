@@ -1,0 +1,14 @@
+{
+    "TorrentClassifierEnhance": {
+        "name": "种子分类整理",
+        "description": "通过匹配种子属性进行自定义分类。",
+        "labels": "下载管理",
+        "version": "1.0",
+        "icon": "https://raw.githubusercontent.com/9606/MoviePilot-Plugins/main/icons/TorrentClassifier.png",
+        "author": "9606",
+        "level": 1,
+        "history": {
+            "v1.0": "基于种子关键字分类整理，添加种子路径过滤"
+        }
+    }
+}
