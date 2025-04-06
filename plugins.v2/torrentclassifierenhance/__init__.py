@@ -107,7 +107,7 @@ class TorrentClassifier(_PluginBase):
                 self._scheduler.start()
 
     @property
-    def service_info(self) -> Optional[ServiceInfo]:
+    def service_infos(self) -> Optional[ServiceInfo]:
         """
         服务信息
         """
@@ -991,6 +991,7 @@ class TorrentClassifier(_PluginBase):
     torrent_tags:
       - '测试标签2'
       - 'Rock'
+    torrent_path: '/path/src/movies'
   torrent_target:
     # 处理后种子的存储目录，auto_category 为 true 时不生效
     change_directory: '/path/to/music'
