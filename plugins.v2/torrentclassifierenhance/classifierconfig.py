@@ -9,7 +9,7 @@ class TorrentFilter:
     torrent_title: Optional[str] = None  # 用于匹配种子标题的正则表达式
     torrent_category: Optional[str] = None  # 种子必须属于的分类
     torrent_tags: Optional[List[str]] = field(default_factory=list)  # 种子必须具有的标签，多个标签时，任一满足即可
-    torrent_path: Optional[str] = None  # 种子必须具有的标签，多个标签时，任一满足即可
+    torrent_path: Optional[str] = None  # 种子必须具有的路径
 
     def __post_init__(self):
         # 移除列表中的空字符串

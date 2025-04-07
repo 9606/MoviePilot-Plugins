@@ -648,8 +648,7 @@ class TorrentClassifierEnhance(_PluginBase):
         """检查种子的当前设置是否符合目标设置"""
         if torrent_target.auto_category != torrent_auto_category:
             return False, f"自动分类 不符合目标值 {torrent_target.auto_category}"
-        if not torrent_target.auto_category and not (
-                torrent_target.change_directory and torrent_target.change_directory == torrent_path):
+        if not torrent_target.auto_category and not (torrent_target.change_directory is None or torrent_target.change_directory == torrent_path):
             return False, f"存储目录 不符合目标值 {torrent_target.change_directory}"
         if torrent_target.change_category and torrent_target.change_category != torrent_category:
             return False, f"分类 不符合目标值 {torrent_target.change_category}"
@@ -713,7 +712,7 @@ class TorrentClassifierEnhance(_PluginBase):
                     return False, f"路径为空，不符合路径「{torrent_filter.torrent_path}」条件"
 
                 if torrent_path != torrent_filter.torrent_path:
-                    return False, f"不符合路径「{torrent_filter.torrent_tags}」条件"
+                    return False, f"不符合路径「{torrent_filter.torrent_path}」条件"
             except Exception as e:
                 return False, f"路径过滤失败，错误：{str(e)}"
 
